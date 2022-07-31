@@ -1,2 +1,6 @@
-# jpholiday-cython
-cythonで高速化したjpholiday
+# cyjpholiday
+cython実装したjpholiday
+
+
+# fork元
+https://github.com/Lalcs/jpholiday
