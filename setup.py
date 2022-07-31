@@ -9,11 +9,11 @@ setup(
     long_description="jpholiday Cython Package",
     ext_modules=cythonize(
         [
-            "jpholiday/jpholiday.pyx",
-            "jpholiday/holiday.pyx",
-            "jpholiday/holiday.pxd",
-            "jpholiday/utils.pyx",
-            "jpholiday/utils.pxd",
+            "cyjpholiday/cyjpholiday.pyx",
+            "cyjpholiday/holiday.pyx",
+            "cyjpholiday/holiday.pxd",
+            "cyjpholiday/utils.pyx",
+            "cyjpholiday/utils.pxd",
         ]
     ),
     maintainer="",

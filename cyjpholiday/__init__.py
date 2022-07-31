@@ -1,5 +1,4 @@
-from .jpholiday import *
-# from .registry import OriginalHoliday
+from .cyjpholiday import *
 
 """
 日本の祝日を扱うクラス
