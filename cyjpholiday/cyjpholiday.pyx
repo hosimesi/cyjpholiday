@@ -1,7 +1,7 @@
 # cython: language_level=3
 # cython: profile=True
 
-from .holiday cimport ALL_HOLIDAY_LIST
+from .holiday cimport ALL_HOLIDAY_LIST, BaseHoliday
 
 from cpython.datetime cimport datetime as cydatetime, date as cydate
 from datetime import datetime
@@ -12,7 +12,9 @@ cpdef bint is_holiday(value: datetime):
     その日が祝日かどうかを返します。
     """
     # Covert
-    cdef cydate cy_date = _to_date(value=value)
+    cdef:
+        cydate cy_date = _to_date(value=value)
+        BaseHoliday holiday_instance
 
     for holiday_instance in ALL_HOLIDAY_LIST:
         if holiday_instance.is_holiday(cy_date):
