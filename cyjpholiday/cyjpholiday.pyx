@@ -27,7 +27,9 @@ cpdef str is_holiday_name(value: datetime):
     その日の祝日名を返します。
     """
     # Covert
-    cdef cydate cy_date = _to_date(value=value)
+    cdef:
+        cydate cy_date = _to_date(value=value)
+        BaseHoliday holiday_instance
 
     for holiday_instance in ALL_HOLIDAY_LIST:
         if holiday_instance.is_holiday_name(cy_date):
@@ -40,9 +42,10 @@ cpdef list year_holidays(int year):
     """
     その年の祝日日、祝日名を返します。
     """
-    cdef cydate cy_date = datetime.date(year, 1, 1)
-
-    cdef list output = []
+    cdef:
+        cydate cy_date = datetime.date(year, 1, 1)
+        list output = []
+        str name
     while cy_date.year == year:
         name = is_holiday_name(cy_date)
         if name is not None:
@@ -56,9 +59,10 @@ cpdef list month_holidays(int year, int month):
     """
     その月の祝日日、祝日名を返します。
     """
-    cdef cydate cy_date = datetime.date(year, month, 1)
-
-    cdef list output = []
+    cdef:
+        cydate cy_date = datetime.date(year, month, 1)
+        list output = []
+        str name
     while cy_date.month == month:
         name = is_holiday_name(cy_date)
         if name is not None:
@@ -74,10 +78,11 @@ cpdef list holidays(cydate start_date, cydate end_date):
     """
 
     # Covert
-    cdef cydate cy_start_date = _to_date(start_date)
-    cdef cydate cy_end_date = _to_date(end_date)
-
-    cdef list output = []
+    cdef:
+        cydate cy_start_date = _to_date(start_date)
+        cydate cy_end_date = _to_date(end_date)
+        list output = []
+        str name
     while cy_start_date <= cy_end_date:
         name = is_holiday_name(cy_start_date)
         if name is not None:
