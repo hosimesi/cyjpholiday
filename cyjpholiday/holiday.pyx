@@ -1,12 +1,10 @@
 # cython: language_level=3
 
 import math
-# from libcpp cimport bool as bint
 
 from .utils cimport _week_day
 from cpython.datetime cimport datetime as cydatetime, date as cydate
 import datetime
-#
 
 cdef list ALL_HOLIDAY_LIST = [
     NewYear(),
@@ -33,60 +31,59 @@ cdef list ALL_HOLIDAY_LIST = [
 ]
 
 cdef class BaseHoliday:
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return ""
 
 
 cdef class OriginalHoliday:
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return ""
-
 
 
 # 元日
 cdef class NewYear(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.month == 1 and date.day == 1:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "元日"
 
 
 # 成人の日
 cdef class AdultDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.year <= 1999 and date.month == 1 and date.day == 15:
             return True
         elif date.year >= 2000 and date.month == 1 and date.day == _week_day(date, 2, 1).day:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "成人の日"
 
 
 # 建国記念の日
 cdef class FoundationDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.year >= 1967 and date.month == 2 and date.day == 11:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "建国記念の日"
 
 
 # 天皇誕生日
 cdef class EmperorsBirthday(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         # 1948-1988年
         if date.year in range(1948, 1988 + 1) and date.month == 4 and date.day == 29:
             return True
@@ -99,21 +96,21 @@ cdef class EmperorsBirthday(BaseHoliday):
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "天皇誕生日"
 
 
 # 春分の日
 cdef class VernalEquinoxDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.month == 3 and date.day == self._vernal_equinox_day(date.year):
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "春分の日"
 
-    cdef double _vernal_equinox_day(self, int year):
+    cpdef double _vernal_equinox_day(self, int year):
         """
         春季皇霊祭: 1879-1947
         春分の日: 1948
@@ -140,53 +137,53 @@ cdef class VernalEquinoxDay(BaseHoliday):
 
 # みどりの日
 cdef class GreeneryDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.year >= 1989 and date.year <= 2006 and date.month == 4 and date.day == 29:
             return True
         elif date.year >= 2007 and date.month == 5 and date.day == 4:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "みどりの日"
 
 
 # 昭和の日
 cdef class ShowaDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.year >= 2007 and date.month == 4 and date.day == 29:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "昭和の日"
 
 
 # 憲法記念日
 cdef class ConstitutionMemorialDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.month == 5 and date.day == 3:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "憲法記念日"
 
 
 # こどもの日
 cdef class ChildrensDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.month == 5 and date.day == 5:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "こどもの日"
 
 
 # 海の日
 cdef class SeaDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         # 2020: 国民の祝日に関する法律(昭和23年法律第178号)の特例
         if date.year == 2020:
             if date == datetime.date(2020, 7, 23):
@@ -210,13 +207,13 @@ cdef class SeaDay(BaseHoliday):
 
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "海の日"
 
 
 # 山の日
 cdef class MountainDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         # 2020: 国民の祝日に関する法律(昭和23年法律第178号)の特例
         if date.year == 2020:
             if date == datetime.date(2020, 8, 10):
@@ -238,34 +235,34 @@ cdef class MountainDay(BaseHoliday):
 
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "山の日"
 
 
 # 敬老の日
 cdef class RespectForTheAgedDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.year >= 1966 and date.year <= 2002 and date.month == 9 and date.day == 15:
             return True
         elif date.year >= 2003 and date.month == 9 and date.day == _week_day(date, 3, 1).day:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "敬老の日"
 
 
 # 秋分の日
 cdef class AutumnEquinoxDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.month == 9 and date.day == self._autumn_equinox_day(date.year):
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "秋分の日"
 
-    cdef double _autumn_equinox_day(self, int year):
+    cpdef double _autumn_equinox_day(self, int year):
         """
         秋分の日の日付を返します。
         秋季皇霊祭: 1879-1947
@@ -292,7 +289,7 @@ cdef class AutumnEquinoxDay(BaseHoliday):
 
 # 体育の日
 cdef class HealthAndSportsDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.year >= 1966 and date.year <= 1999 and date.month == 10 and date.day == 10:
             return True
         elif date.year >= 2000 and date.year <= 2019 and date.month == 10 and date.day == _week_day(date, 2,
@@ -300,13 +297,13 @@ cdef class HealthAndSportsDay(BaseHoliday):
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "体育の日"
 
 
 # スポーツの日
 cdef class SportsDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         # 2020: 国民の祝日に関する法律(昭和23年法律第178号)の特例
         if date.year == 2020:
             if date == datetime.date(2020, 7, 24):
@@ -328,40 +325,40 @@ cdef class SportsDay(BaseHoliday):
 
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "スポーツの日"
 
 
 # 文化の日
 cdef class CultureDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.month == 11 and date.day == 3:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "文化の日"
 
 
 # 勤労感謝の日
 cdef class LaborThanksgivingDay(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if date.month == 11 and date.day == 23:
             return True
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "勤労感謝の日"
 
 
 # 皇室慶弔行事に伴う祝日
 cdef class ExtraHolidays(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    cpdef bint is_holiday(self, cydate date):
         if self.is_holiday_name(date) is None:
             return False
         return True
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         if date == datetime.date(1959, 4, 10):
             return "皇太子・明仁親王の結婚の儀"
         elif date == datetime.date(1989, 2, 24):
@@ -380,30 +377,32 @@ cdef class ExtraHolidays(BaseHoliday):
 
 # 振替休日
 cdef class TransferHoliday(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    # cdef:
+        # BaseHoliday holiday_instance
+    cpdef bint is_holiday(self, cydate date):
         if self.is_holiday_name(date) is None:
             return False
         return True
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         if date.year < 1973:
             return None
 
         # GW
         if date.year > 2006 and date.month == 5 and date.day == 6 and date.isoweekday() in (2, 3):
-            for holiday in ALL_HOLIDAY_LIST:
-                if holiday.__class__.__name__ == self.__class__.__name__:
+            for holiday_instance in ALL_HOLIDAY_LIST:
+                if holiday_instance.__class__.__name__ == self.__class__.__name__:
                     continue
 
-                if isinstance(holiday, NationalHoliday):
+                if isinstance(holiday_instance, NationalHoliday):
                     continue
 
-                if isinstance(holiday, OriginalHoliday):
+                if isinstance(holiday_instance, OriginalHoliday):
                     continue
 
-                if holiday.is_holiday((date + datetime.timedelta(days=-date.isoweekday()))):
+                if holiday_instance.is_holiday((date + datetime.timedelta(days=-date.isoweekday()))):
                     return "{} {}".format(
-                        holiday.is_holiday_name((date + datetime.timedelta(days=-date.isoweekday()))),
+                        holiday_instance.is_holiday_name((date + datetime.timedelta(days=-date.isoweekday()))),
                         "振替休日")
 
         # 月曜日でない
@@ -411,49 +410,53 @@ cdef class TransferHoliday(BaseHoliday):
             return None
 
         # GW以外
-        for holiday in ALL_HOLIDAY_LIST:
-            if holiday.__class__.__name__ == self.__class__.__name__:
+        for holiday_instance in ALL_HOLIDAY_LIST:
+            if holiday_instance.__class__.__name__ == self.__class__.__name__:
                 continue
 
-            if isinstance(holiday, NationalHoliday):
+            if isinstance(holiday_instance, NationalHoliday):
                 continue
 
-            if isinstance(holiday, OriginalHoliday):
+            if isinstance(holiday_instance, OriginalHoliday):
                 continue
 
-            if holiday.is_holiday((date + datetime.timedelta(days=-1))):
-                return "{} {}".format(holiday.is_holiday_name((date + datetime.timedelta(days=-1))),
+            if holiday_instance.is_holiday((date + datetime.timedelta(days=-1))):
+                return "{} {}".format(holiday_instance.is_holiday_name((date + datetime.timedelta(days=-1))),
                                       "振替休日")
 
 
 # 国民の休日
 cdef class NationalHoliday(BaseHoliday):
-    cdef bint is_holiday(self, cydate date):
+    # cdef:
+        # BaseHoliday holiday_instance
+        # bint old = False
+        # bint new = False
+
+    # def __cinit__(self, old, new):
+    #     self.old = old
+
+    cpdef bint is_holiday(self, cydate date):
 
         if date.isoweekday() == 7:
             return False
 
-        result = {
-            "old": False,
-            "new": False,
-        }
 
-        for holiday in ALL_HOLIDAY_LIST:
-            if holiday.__class__.__name__ == self.__class__.__name__:
+        for holiday_instance in ALL_HOLIDAY_LIST:
+            if holiday_instance.__class__.__name__ == self.__class__.__name__:
                 continue
 
-            if isinstance(holiday, OriginalHoliday):
+            if isinstance(holiday_instance, OriginalHoliday):
                 continue
 
-            if holiday.is_holiday((date + datetime.timedelta(days=-1))):
-                result["old"] = True
-            if holiday.is_holiday((date + datetime.timedelta(days=1))):
-                result["new"] = True
+            if holiday_instance.is_holiday((date + datetime.timedelta(days=-1))):
+                old = True
+            if holiday_instance.is_holiday((date + datetime.timedelta(days=1))):
+                new = True
 
-            if list(result.values()) == [True, True]:
+            if old == True and new == True:
                 return True
 
         return False
 
-    cdef str is_holiday_name(self, cydate date):
+    cpdef str is_holiday_name(self, cydate date):
         return "国民の休日"
