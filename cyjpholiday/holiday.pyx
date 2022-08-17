@@ -377,8 +377,6 @@ cdef class ExtraHolidays(BaseHoliday):
 
 # 振替休日
 cdef class TransferHoliday(BaseHoliday):
-    # cdef:
-        # BaseHoliday holiday_instance
     cpdef bint is_holiday(self, cydate date):
         if self.is_holiday_name(date) is None:
             return False
@@ -421,20 +419,11 @@ cdef class TransferHoliday(BaseHoliday):
                 continue
 
             if holiday_instance.is_holiday((date + datetime.timedelta(days=-1))):
-                return "{} {}".format(holiday_instance.is_holiday_name((date + datetime.timedelta(days=-1))),
-                                      "振替休日")
+                return "{} {}".format(holiday_instance.is_holiday_name((date + datetime.timedelta(days=-1))), "振替休日")
 
 
 # 国民の休日
 cdef class NationalHoliday(BaseHoliday):
-    # cdef:
-        # BaseHoliday holiday_instance
-        # bint old = False
-        # bint new = False
-
-    # def __cinit__(self, old, new):
-    #     self.old = old
-
     cpdef bint is_holiday(self, cydate date):
 
         if date.isoweekday() == 7:

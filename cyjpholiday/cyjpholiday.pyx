@@ -37,62 +37,6 @@ cpdef str is_holiday_name(value: datetime):
 
     return None
 
-
-cpdef list year_holidays(int year):
-    """
-    その年の祝日日、祝日名を返します。
-    """
-    cdef:
-        cydate cy_date = datetime.date(year, 1, 1)
-        list output = []
-        str name
-    while cy_date.year == year:
-        name = is_holiday_name(cy_date)
-        if name is not None:
-            output.append((cy_date, name))
-
-        cy_date = cy_date + datetime.timedelta(days=1)
-
-    return output
-
-cpdef list month_holidays(int year, int month):
-    """
-    その月の祝日日、祝日名を返します。
-    """
-    cdef:
-        cydate cy_date = datetime.date(year, month, 1)
-        list output = []
-        str name
-    while cy_date.month == month:
-        name = is_holiday_name(cy_date)
-        if name is not None:
-            output.append((cy_date, name))
-
-        cy_date = cy_date + datetime.timedelta(days=1)
-
-    return output
-
-cpdef list holidays(cydate start_date, cydate end_date):
-    """
-    指定された期間の祝日日、祝日名を返します。
-    """
-
-    # Covert
-    cdef:
-        cydate cy_start_date = _to_date(start_date)
-        cydate cy_end_date = _to_date(end_date)
-        list output = []
-        str name
-    while cy_start_date <= cy_end_date:
-        name = is_holiday_name(cy_start_date)
-        if name is not None:
-            output.append((cy_start_date, name))
-
-        cy_start_date = cy_start_date + datetime.timedelta(days=1)
-
-    return output
-
-
 cdef cydate _to_date(cydatetime value):
     """
     datetime型をdate型へ変換
