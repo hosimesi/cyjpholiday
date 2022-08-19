@@ -10,7 +10,7 @@ class TestYear2022(unittest.TestCase):
         """
         2022年祝日
         """
-        self.assertEqual(cyjpholiday.is_holiday_name(dt.datetimetime(2022, 1, 1, 1, 1, 1)), "元日")
+        self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2022, 1, 1, 1, 1, 1)), "元日")
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2022, 1, 10, 1, 1, 1)), "成人の日")
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2022, 2, 11, 1, 1, 1)), "建国記念の日")
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2022, 2, 23, 1, 1, 1)), "天皇誕生日")

@@ -35,7 +35,7 @@ import datetime as dt
 jpholiday.is_holiday_name(dt.datetime(2017, 1, 1, 1, 1, 1))
 > '元日'
 jpholiday.is_holiday_name(dt.datetime(2017, 1, 2, 1, 1, 1))
-> '元日 振替休日'
+> '振替休日'
 jpholiday.is_holiday_name(dt.datetime(2017, 1, 3, 1, 1, 1))
 > None
 ```

@@ -9,11 +9,6 @@ cdef class BaseHoliday:
     cpdef str is_holiday_name(self, cydate date)
 
 
-cdef class OriginalHoliday:
-    cpdef bint is_holiday(self, cydate date)
-    cpdef str is_holiday_name(self, cydate date)
-
-
 # 元日
 cdef class NewYear(BaseHoliday):
     cpdef bint is_holiday(self, cydate date)

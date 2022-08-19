@@ -11,7 +11,7 @@ class TestYear2023(unittest.TestCase):
         2023年祝日
         """
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2023, 1, 1, 1, 1, 1)), "元日")
-        self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2023, 1, 2, 1, 1, 1)), "元日 振替休日")
+        self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2023, 1, 2, 1, 1, 1)), "振替休日")
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2023, 1, 9, 1, 1, 1)), "成人の日")
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2023, 2, 11, 1, 1, 1)), "建国記念の日")
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2023, 2, 23, 1, 1, 1)), "天皇誕生日")

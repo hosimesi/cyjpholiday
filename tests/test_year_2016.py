@@ -14,7 +14,7 @@ class TestYear2016(unittest.TestCase):
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2016, 1, 11)), '成人の日')
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2016, 2, 11)), '建国記念の日')
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2016, 3, 20)), '春分の日')
-        self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2016, 3, 21)), '春分の日 振替休日')
+        self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2016, 3, 21)), '振替休日')
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2016, 4, 29)), '昭和の日')
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2016, 5, 3)), '憲法記念日')
         self.assertEqual(cyjpholiday.is_holiday_name(dt.datetime(2016, 5, 4)), 'みどりの日')
