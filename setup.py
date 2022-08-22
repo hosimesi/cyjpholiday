@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import find_packages, setup
 
 from Cython.Build import cythonize
 
@@ -16,8 +16,10 @@ setup(
             "cyjpholiday/utils.pxd",
         ]
     ),
+    install_requires=["calender", "datetime", "math"],
     maintainer="",
     maintainer_email="",
     zip_safe=False,
+    packages=find_packages(exclude=("tests")),
     include_package_data=False,
 )
