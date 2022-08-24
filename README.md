@@ -1,10 +1,7 @@
 # CYPHoliday
-[![image](https://img.shields.io/pypi/v/jpholiday.svg)](https://pypi.org/project/jpholiday/)
+
 [![image](https://img.shields.io/pypi/l/jpholiday.svg)](https://pypi.org/project/jpholiday/)
 [![image](https://img.shields.io/pypi/pyversions/jpholiday.svg)](https://pypi.org/project/jpholiday/)
-[![image](https://img.shields.io/github/contributors/lalcs/jpholiday.svg)](https://github.com/lalcs/jpholiday/graphs/contributors)
-[![image](https://img.shields.io/pypi/dm/jpholiday)](https://pypistats.org/packages/jpholiday)
-![Unittest](https://github.com/Lalcs/jpholiday/workflows/Unittest/badge.svg)
 
 
 cythonで実装したjpholiday
